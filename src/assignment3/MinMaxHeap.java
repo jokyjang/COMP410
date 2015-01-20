@@ -11,7 +11,7 @@ public class MinMaxHeap {
 	
 	public void print() {
 		String str = "[";
-		for(int i = 0; i < currentSize; ++i) {
+		for(int i = 1; i <= currentSize; ++i) {
 			str += arr[i]+",";
 		}
 		str += "]";
@@ -202,12 +202,23 @@ public class MinMaxHeap {
 	}
 	
 	public static void main(String[] args) {
-		MinMaxHeap mmh = new MinMaxHeap(20);
+		MinMaxHeap maxMMH = new MinMaxHeap(20);
+		MinMaxHeap minMMH = new MinMaxHeap(20);
 		int[] numbers = {71, 11, 41, 10, 46, 31, 13, 8, 16, 31, 51, 21};
-		for(int n : numbers) {
-			mmh.insert(n);
-			mmh.print();
+		//int[] numbers = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19};
+    	for(int n : numbers) {
+			maxMMH.insert(n);
+			minMMH.insert(n);
+			System.out.print(maxMMH.min() + "," + maxMMH.max() + " ");
+			maxMMH.print();
 		}
-		
+    	String minS = "";
+    	String maxS = "";
+		while(!maxMMH.isEmpty()) {
+			maxS += maxMMH.deleteMax()+",";
+			minS += minMMH.deleteMin()+",";
+		}
+		System.out.println(minS);
+		System.out.println(maxS);
 	}
 }
