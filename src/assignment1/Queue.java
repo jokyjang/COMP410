@@ -3,52 +3,40 @@ package assignment1;
 public class Queue<T> {
 	private Node<T> bottom;
 	private Node<T> top;
-	private int length;
-	private int capacity;
 	
-	public Queue(int capacity) {
-		this.capacity = capacity;
-		this.length = 0;
+	public Queue() {
 		this.bottom = null;
 		this.top = null;
 	}
     public boolean isEmpty() {
-    	return this.length == 0;
-    }
-    public boolean isFull() {
-    	return this.length == this.capacity;
+    	return bottom == null && top == null;
     }
     public T peek() {
-    	if (this.isEmpty()) {
+    	if (isEmpty()) {
     		return null;
     	}
-    	return this.bottom.data;
+    	return bottom.data;
     }
     public T dequeue() {
     	if (this.isEmpty()) {
     		return null;
     	}
-    	T data = this.bottom.data;
-    	this.bottom = this.bottom.next;
-    	if (this.bottom == null) {
-    		this.top = null;
+    	T data = bottom.data;
+    	bottom = bottom.next;
+    	if (bottom == null) {
+    		top = null;
     	}
-    	this.length--;
     	return data;
     }
     public void enqueue(T element) {
-    	if (this.isFull()) {
-    		return;
-    	}
     	Node<T> node = new Node<T>(element, null);
-    	if (this.top != null) {
-    		this.top.next = node;
+    	if (top != null) {
+    		top.next = node;
     	}
     	this.top = node;
-    	if (this.bottom == null) {
-    		this.bottom = node;
+    	if (bottom == null) {
+    		bottom = node;
     	}
-    	this.length++;
     }
     public void print() {
     	if (this.isEmpty()) {
@@ -62,7 +50,7 @@ public class Queue<T> {
     	}
     }
     public static void main(String []args) {
-    	Queue<Integer> q = new Queue<Integer>(10);
+    	Queue<Integer> q = new Queue<Integer>();
     	for(int i = 1; i < 6; i++) {
     		q.enqueue(i);
     	}
