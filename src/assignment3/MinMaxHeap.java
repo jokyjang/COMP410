@@ -1,5 +1,7 @@
 package assignment3;
 
+import java.util.Random;
+
 public class MinMaxHeap {
 	private int currentSize;
 	private int[] arr;
@@ -60,6 +62,7 @@ public class MinMaxHeap {
 		int temp = arr[i/4];
 		arr[i/4] = arr[i];
 		arr[i] = temp;
+		bubbleUpMax(i/4);
 	}
 	
 	private void bubbleUpMin(int i) {
@@ -68,6 +71,7 @@ public class MinMaxHeap {
 		int temp = arr[i/4];
 		arr[i/4] = arr[i];
 		arr[i] = temp;
+		bubbleUpMin(i/4);
 	}
 	
 	public int deleteMin() {
@@ -202,11 +206,16 @@ public class MinMaxHeap {
 	}
 	
 	public static void main(String[] args) {
-		MinMaxHeap maxMMH = new MinMaxHeap(20);
-		MinMaxHeap minMMH = new MinMaxHeap(20);
-		int[] numbers = {71, 11, 41, 10, 46, 31, 13, 8, 16, 31, 51, 21};
+		MinMaxHeap maxMMH = new MinMaxHeap(100);
+		MinMaxHeap minMMH = new MinMaxHeap(100);
+		int[] numbers = new int[101];
+		for(int i = 0; i < 100; ++i) {
+			numbers[i+1] = (new Random()).nextInt(100);
+		}
+		//int[] numbers = {71, 11, 41, 10, 46, 31, 13, 8, 16, 31, 51, 21};
 		//int[] numbers = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19};
-    	for(int n : numbers) {
+    	for(int i = 1; i < 101; i++) {
+    		int n = numbers[i];
 			maxMMH.insert(n);
 			minMMH.insert(n);
 			System.out.print(maxMMH.min() + "," + maxMMH.max() + " ");
